@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Font Control Lab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        /* Style the paragraph and give it a default border style */
+        #target-paragraph {
+            padding: 15px;
+            font-size: 16px;
+            border-style: solid; 
+            border-width: 2px;
+            border-color: rgb(0, 0, 0);
+            color: rgb(0, 0, 0);
+            transition: all 0.2s ease; 
+        }
+        .control-panel {
+            margin-bottom: 20px;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .control-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: inline-block;
+            width: 180px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 5px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel">
+        <!-- 1. Text field for RGB Values -->
+        <div class="control-group">
+            <label for="rgb-input">RGB Color (e.g., 255, 99, 71):</label>
+            <input type="text" id="rgb-input" placeholder="255, 0, 0" value="0, 0, 0">
+        </div>
+
+        <!-- 2. Control for Border Width -->
+        <div class="control-group">
+            <label for="width-input">Border Width (px):</label>
+            <input type="number" id="width-input" min="0" max="20" value="2">
+        </div>
+        
+        <button id="apply-btn">Apply Styles</button>
+    </div>
+
+    <!-- 3. Target Paragraph with Dummy Text -->
+    <p id="target-paragraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum, 
+        turpis ut pretium elementum, sapien nibh sodales nisl, ut dictum tellus 
+        magna non diam. Cras sodales elementum varius.
+    </p>
+
+    <script>
+        // Get references to the HTML elements
+        const rgbInput = document.getElementById('rgb-input');
+        const widthInput = document.getElementById('width-input');
+        const applyBtn = document.getElementById('apply-btn');
+        const targetParagraph = document.getElementById('target-paragraph');
+
+        // Function to apply the user's inputs to the CSS properties
+        function updateParagraphStyles() {
+            // Get values from the inputs
+            const rgbValue = rgbInput.value.trim();
+            const borderWidthValue = widthInput.value;
+
+            const cssColor = `rgb(${rgbValue})`;
+
+            // Apply directly to the element's style object
+            targetParagraph.style.color = cssColor;
+            targetParagraph.style.borderColor = cssColor;
+            targetParagraph.style.borderWidth = `${borderWidthValue}px`;
+        }
+
+        // Listen for the button click to apply changes
+        applyBtn.addEventListener('click', updateParagraphStyles);
+
+        // Optional: Trigger changes automatically when typing or changing values
+        rgbInput.addEventListener('input', updateParagraphStyles);
+        widthInput.addEventListener('input', updateParagraphStyles);
+    </script>
+</body>
+</html>
